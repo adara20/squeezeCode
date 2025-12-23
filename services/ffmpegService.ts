@@ -23,12 +23,23 @@ export const getFFmpeg = async (onLog?: (message: string) => void) => {
 };
 
 export const calculateBitrate = (targetSizeMB: number, durationSec: number): number => {
-  // Target Size in bits = MB * 1024 * 1024 * 8
-  // Buffer 5% for container overhead
-  const targetBits = targetSizeMB * 1024 * 1024 * 8 * 0.95;
-  const bitrate = Math.floor(targetBits / durationSec);
-  // Ensure a minimum bitrate of 100kbps to avoid total failure
-  return Math.max(bitrate, 100000);
+  const audioBitrate = 128000; // 128 kbps
+  const targetBits = targetSizeMB * 1024 * 1024 * 8; // Total target size in bits
+  const audioBits = audioBitrate * durationSec; // Total audio size in bits
+  
+  // Subtract audio size and apply 5% overhead buffer to the remaining video budget
+  let videoBits = (targetBits - audioBits) * 0.95;
+
+  if (videoBits <= 0) {
+    // If target size is smaller than audio, or very close, 
+    // we can't allocate much to video. Return a sensible minimum.
+    // ffmpeg will do its best given the constraints.
+    return 50000; // 50 kbps
+  }
+
+  const bitrate = Math.floor(videoBits / durationSec);
+  // Ensure a minimum bitrate to avoid extremely poor quality or ffmpeg errors
+  return Math.max(bitrate, 100000); // 100 kbps minimum
 };
 
 export const getVideoDuration = (file: File): Promise<number> => {
