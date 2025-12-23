@@ -1,0 +1,5 @@
+{
+  "name": "SqueezeCode - Privacy-First Video Compressor",
+  "description": "A high-performance, client-side video compression tool optimized for Discord, Email, and platform limits. Files never leave your browser.",
+  "requestFramePermissions": []
+}
