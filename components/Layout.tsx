@@ -16,9 +16,9 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <Link to="/25mb-video-compressor" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Nitro (25MB)</Link>
           </nav>
           <div className="flex items-center gap-3">
-             <button className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-full text-xs font-semibold transition-all">
+             <a href="https://buymeacoffee.com/squeezecode" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-full text-xs font-semibold transition-all">
                 Buy Me Coffee ☕
-             </button>
+             </a>
           </div>
         </div>
       </header>
