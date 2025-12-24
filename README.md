@@ -2,19 +2,44 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# SqueezeCode: Privacy-First Video Compressor
 
-This contains everything you need to run your app locally.
+SqueezeCode is a web-based video compressor that runs entirely in your browser. It allows you to efficiently reduce video file sizes for platforms like Discord and email, ensuring your private data never leaves your device. Powered by WebAssembly and FFmpeg.wasm, it offers fast, local, and private video compression.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1ia8Vj0qwnpTGlFtuvua9ycW_gYc0mWAe
+## Features
+
+*   **Privacy-First:** All video processing happens directly in your browser. Your files are never uploaded to a server.
+*   **Target Size Compression:** Precisely compress videos to meet specific file size limits (e.g., 8MB, 25MB) while maintaining optimal quality.
+*   **Fast & Efficient:** Leverages WebAssembly (WASM) for near-native performance right in your browser.
+*   **User-Friendly:** Simple drag-and-drop interface.
+
+## Technologies Used
+
+*   **Frontend:** React with TypeScript
+*   **Build Tool:** Vite
+*   **Video Processing:** FFmpeg.wasm (WebAssembly)
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js (which includes npm)
 
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/adara20/squeezeCode.git
+    cd squeezeCode
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at `http://localhost:3000` (or another port if 3000 is in use).
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Important Note
+
+Due to the nature of FFmpeg.wasm and browser security policies, the development server requires specific Cross-Origin Isolation headers. These are automatically configured in `vite.config.ts`. If you encounter issues (e.g., compression stuck at 0%), ensure these headers are correctly applied and try clearing your browser's cache.
+
+---
