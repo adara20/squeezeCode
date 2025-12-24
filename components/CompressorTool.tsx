@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
+import { track } from '@vercel/analytics/react'; // Import track function
 import { getFFmpeg, calculateBitrate, getVideoDuration } from '../services/ffmpegService';
 import { PRESETS, MAX_INPUT_SIZE_MB } from '../constants';
 import { CompressionStatus, CompressionPreset } from '../types';
@@ -226,6 +227,7 @@ const CompressorTool: React.FC<CompressorToolProps> = ({ initialTargetSize }) =>
                     <a 
                       href={resultUrl} 
                       download={`compressed_${file?.name || 'video.mp4'}`}
+                      onClick={() => track('Video Downloaded', { preset: selectedPreset.name, targetSize: selectedPreset.targetSizeMB })}
                       className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
